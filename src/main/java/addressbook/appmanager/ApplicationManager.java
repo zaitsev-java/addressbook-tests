@@ -1,5 +1,6 @@
-package addressbook;
+package addressbook.appmanager;
 
+import addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
     WebDriver driver;
 
-    protected void init() {
+    public void init() {
         System.setProperty("webdriver.gecko.driver", "drivers/geckodriver");
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
 //        driver = new FirefoxDriver();
@@ -20,7 +21,7 @@ public class ApplicationManager {
         login("admin", "secret");
     }
 
-    private void login(String username, String password) {
+    public void login(String username, String password) {
         driver.findElement(By.name("user")).click();
         driver.findElement(By.name("user")).clear();
         driver.findElement(By.name("user")).sendKeys(username);
@@ -30,15 +31,15 @@ public class ApplicationManager {
         driver.findElement(By.xpath("//body//input[3]")).click();
     }
 
-    protected void returnToGroupPage() {
+    public void returnToGroupPage() {
         driver.findElement(By.linkText("group page")).click();
     }
 
-    protected void submitGroupCreation() {
+    public void submitGroupCreation() {
         driver.findElement(By.name("submit")).click();
     }
 
-    protected void fillGroupForm(GroupData groupData) {
+    public void fillGroupForm(GroupData groupData) {
         driver.findElement(By.name("group_name")).click();
         driver.findElement(By.name("group_name")).clear();
         driver.findElement(By.name("group_name")).sendKeys(groupData.getGroupName());
@@ -50,23 +51,23 @@ public class ApplicationManager {
         driver.findElement(By.name("group_footer")).sendKeys(groupData.getGroupFooter());
     }
 
-    protected void initGroupCreation() {
+    public void initGroupCreation() {
         driver.findElement(By.name("new")).click();
     }
 
-    protected void goToGroupPage() {
+    public void goToGroupPage() {
         driver.findElement(By.linkText("groups")).click();
     }
 
-    protected void deleteSelectedGroups() {
+    public void deleteSelectedGroups() {
         driver.findElement(By.name("delete")).click();
     }
 
-    protected void selectGroup() {
+    public void selectGroup() {
         driver.findElement(By.name("selected[]")).click();
     }
 
-    protected void stop() {
+    public void stop() {
         driver.quit();
     }
 }
