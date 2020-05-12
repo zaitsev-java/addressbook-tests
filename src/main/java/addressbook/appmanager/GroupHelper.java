@@ -4,7 +4,9 @@ import addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class GroupHelper {
+public class GroupHelper extends HelperBase {
+
+
     private ChromeDriver driver;
 
     public GroupHelper(ChromeDriver driver) {
@@ -12,34 +14,40 @@ public class GroupHelper {
     }
 
     public void returnToGroupPage() {
-        driver.findElement(By.linkText("group page")).click();
+        click(By.linkText("group page"));
     }
 
     public void submitGroupCreation() {
-        driver.findElement(By.name("submit")).click();
+        click(By.name("submit"));
+    }
+
+    private void click(By locator) {
+        driver.findElement(locator).click();
     }
 
     public void fillGroupForm(GroupData groupData) {
-        driver.findElement(By.name("group_name")).click();
-        driver.findElement(By.name("group_name")).clear();
-        driver.findElement(By.name("group_name")).sendKeys(groupData.getGroupName());
-        driver.findElement(By.name("group_header")).click();
-        driver.findElement(By.name("group_header")).clear();
-        driver.findElement(By.name("group_header")).sendKeys(groupData.getGroupHeader());
-        driver.findElement(By.name("group_footer")).click();
-        driver.findElement(By.name("group_footer")).clear();
-        driver.findElement(By.name("group_footer")).sendKeys(groupData.getGroupFooter());
+        type(By.name("group_name"), groupData.getGroupName());
+
+        type(By.name("group_header"), groupData.getGroupHeader());
+
+        type(By.name("group_footer"), groupData.getGroupFooter());
+    }
+
+    private void type(By locator, String text) {
+        click(locator);
+        driver.findElement(locator).clear();
+        driver.findElement(locator).sendKeys(text);
     }
 
     public void initGroupCreation() {
-        driver.findElement(By.name("new")).click();
+        click(By.name("new"));
     }
 
     public void deleteSelectedGroups() {
-        driver.findElement(By.name("delete")).click();
+        click(By.name("delete"));
     }
 
     public void selectGroup() {
-        driver.findElement(By.name("selected[]")).click();
+        click(By.name("selected[]"));
     }
 }
