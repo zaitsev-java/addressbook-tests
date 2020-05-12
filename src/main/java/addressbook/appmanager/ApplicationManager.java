@@ -6,9 +6,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-
     ChromeDriver driver;
 
+    private SessionHelper sessionHelper;
+    private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
 
     public void init() {
@@ -20,6 +21,8 @@ public class ApplicationManager {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://localhost:8080/addressbook/index.php");
         groupHelper = new GroupHelper(driver);
+        navigationHelper = new NavigationHelper(driver);
+        sessionHelper = new SessionHelper(driver);
         login("admin", "secret");
     }
 
@@ -33,15 +36,15 @@ public class ApplicationManager {
         driver.findElement(By.xpath("//body//input[3]")).click();
     }
 
-    public void goToGroupPage() {
-        driver.findElement(By.linkText("groups")).click();
-    }
-
     public void stop() {
         driver.quit();
     }
 
     public GroupHelper getGroupHelper() {
         return groupHelper;
+    }
+
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
     }
 }
