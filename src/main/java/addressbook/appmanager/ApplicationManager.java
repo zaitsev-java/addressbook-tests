@@ -1,11 +1,11 @@
 package addressbook.appmanager;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
+
     ChromeDriver driver;
 
     private SessionHelper sessionHelper;
@@ -25,7 +25,6 @@ public class ApplicationManager {
         sessionHelper = new SessionHelper(driver);
         sessionHelper.login("admin", "secret");
     }
-
 
 
     public void stop() {
